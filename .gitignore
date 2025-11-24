@@ -1,0 +1,16 @@
+.vscode
+!Assets
+Assets/*
+!Assets/Development
+Assets/Development/*
+!Assets/Development/Script
+
+Packages
+ProjectSettings
+
+Library
+Logs
+UserSettings
+Temp
+*.csproj
+
