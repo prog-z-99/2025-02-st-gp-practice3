@@ -6,17 +6,10 @@ public class Player : MonoBehaviour
 {
     Rigidbody rb;
     Animator animator;
-    // Player
     public float speed;
-
-    // Bullet
     public GameObject bulletPrefab;
     static float bullet_gap = 0.25f;
-
-    // Particle
     public ParticleSystem LevelUp_Particle;
-
-    // Audio
     public SoundManager audioMgr;
 
     void Start()
@@ -33,17 +26,11 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     endPosition = Input.mousePosition;
-        // }
         if (Input.GetMouseButton(0))
         {
             float destX = (Input.mousePosition.x / Screen.width * 10.0f) - 5.0f;
 
             float distance = rb.position.x - destX;
-            Debug.Log("mouse: " + destX);
-            Debug.Log("body: " + rb.position.x);
 
             if (distance < -0.1f)
             {
@@ -77,10 +64,8 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (GameManager.instance.GetItem(other.tag))
-        {
-            LevelUp(other.gameObject);
-        }
+        GameManager.instance.GetItem(other.tag);
+        LevelUp(other.gameObject);
     }
 
     void AnimatorChange(string temp)
@@ -105,8 +90,7 @@ public class Player : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x + posX, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
             bullet.GetComponent<Bullet>().Initialize(
-                damage: GameManager.instance.bullet_damage,
-                penetration_count: GameManager.instance.bullet_penetration_count
+                damage: GameManager.instance.bullet_damage
             );
         }
     }

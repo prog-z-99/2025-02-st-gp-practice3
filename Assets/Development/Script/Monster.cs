@@ -16,10 +16,10 @@ public class Monster : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        var rd = GameManager.instance.CurrentRoundData;
-        max_hp = Mathf.RoundToInt(rd.mob_hp_rate * max_hp);
+        var rd = GameManager.instance.wave;
+        max_hp = Mathf.RoundToInt((1 + rd * 0.1f) * max_hp);
         hp = max_hp;
-        speed = speed * rd.mob_speed_rate;
+        speed = speed * (1 + rd * 0.1f);
         healthBar.gameObject.SetActive(false);
     }
 
@@ -57,11 +57,8 @@ public class Monster : MonoBehaviour
             {
                 SetDeath();
             }
+            Destroy(other.transform.parent.gameObject);
 
-            if (--bullet.penetration_count <= 0)
-            {
-                Destroy(other.transform.parent.gameObject);
-            }
         }
     }
 
@@ -69,6 +66,7 @@ public class Monster : MonoBehaviour
     {
         isDead = true;
         GetComponent<CapsuleCollider>().enabled = false;
+        SoundManager.instance.AudioStart(SoundManager.AudioValue.Death);
         Destroy(GetComponent<Rigidbody>());
         healthBar.gameObject.SetActive(false);
         animator.SetTrigger("Death");

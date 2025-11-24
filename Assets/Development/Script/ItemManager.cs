@@ -54,10 +54,10 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public class ATK_Penetration : Item
+    public class ATK_Size : Item
     {
-        public const string tag = "ATK_Penetration";
-        public const string text = "Penetration Up";
+        public const string tag = "ATK_Size";
+        public const string text = "Size Up";
         public static Material material = Resources.Load<Material>("Material/Fade03");
 
         public override string Tag
@@ -121,7 +121,6 @@ public class ItemManager : MonoBehaviour
         items = new() {
             new (new ATK_Count(), 10),
             new (new ATK_Speed(), 10),
-            new (new ATK_Penetration(), 10),
             new (new ATK_Damage(), 10),
         };
         for (int i = 0; i < items.Count; i++)

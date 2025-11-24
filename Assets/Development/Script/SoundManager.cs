@@ -9,7 +9,8 @@ public class SoundManager : MonoBehaviour
     {
         Shoot = 0,
         Hit = 1,
-        Get = 2
+        Get = 2,
+        Death = 3
     };
     public static SoundManager instance;
     AudioSource source;
